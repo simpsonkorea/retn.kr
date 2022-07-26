@@ -1,33 +1,3 @@
-Skip to content
-Product 
-Team
-Enterprise
-Explore 
-Marketplace
-Pricing 
-Search
-Sign in
-Sign up
-braze-inc
-/
-in-app-message-templates
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-in-app-message-templates/braze-templates/1-braze-dashboard-carousel-modal/index.html
-@davidbielik
-davidbielik Braze CDN assets
-Latest commit ab90e89 on 7 Aug 2020
- History
- 1 contributor
-545 lines (489 sloc)  22.2 KB
-
 <!doctype html>
 <html lang="en">
 
@@ -571,17 +541,3 @@ Latest commit ab90e89 on 7 Aug 2020
 </body>
 
 </html>
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
