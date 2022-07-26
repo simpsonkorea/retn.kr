@@ -147,6 +147,8 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
+            margin-top: 50px;
+            border-radius: 15px 15px 0px 0px;
         }
 
         .modal__content {
@@ -155,17 +157,20 @@
             position: relative;
             height: 450px;
             max-width: 450px;
-            flex-basis: 450px;
+            flex-basis: 450px;            
             padding: 60px 40px 40px;
             background-color: rgb(255, 255, 255);
+            border-radius: 0px 0px 15px 15px;
         }
 
         .modal__cross {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 80px;
+            right: 10px;
             height: 34px;
-            width: 34px;
+            width: 34px;            
+            margin-top: -20px;
+
         }
 
         .modal__title {
@@ -201,6 +206,7 @@
             font-weight: 700;
             color: inherit;
             display: inline-block;
+            border-radius: 10px 10px 10px 10px;
         }
 
         .modal__btn--main {
@@ -394,9 +400,9 @@
                         <p class="modal__text">여기 택스트는 좀 길게 쓸 수 있을듯.</p>
                         <div class="modal__button-wrap">
                             <a class="modal__btn modal__btn--secondary" href="jrdt://run?path=home&hash=first-time-free"
-                                onclick="appboyBridge.logClick('1');">첫방문무료</a>
+                                onclick="appboyBridge.logClick('1');"><center>첫방문무료</center></a>
                             <a class="modal__btn modal__btn--main" href="jrdt://run?path=home&hash=neighbor_teachers"
-                                onclick="appboyBridge.logClick('0');">우동쌤</a>
+                                onclick="appboyBridge.logClick('0');"><center>우동쌤</center></a>
                         </div>
                     </div>
                 </div>
@@ -421,11 +427,9 @@
                                     fill="#A8B3B8" />
                             </svg>
                         </button>
-                        <h1 class="modal__title">Welcome to Braze Templates!</h1>
-                        <h2 class="modal__sub-title">Be sure to change the text here</h2>
-                        <p class="modal__text">And, remember to swap out the placeholder images. If you want, upload
-                            your own font and
-                            change them at the top of this file.</p>
+                        <h1 class="modal__title">11111111</h1>
+                        <h2 class="modal__sub-title">11111111</h2>
+                        <p class="modal__text">11111111</p>
                         <div class="modal__button-wrap">
                             <a class="modal__btn modal__btn--secondary" href="#"
                                 onclick="appboyBridge.logClick('1');">Secondary
@@ -456,11 +460,9 @@
                                     fill="#A8B3B8" />
                             </svg>
                         </button>
-                        <h1 class="modal__title">Welcome to Braze Templates!</h1>
-                        <h2 class="modal__sub-title">Be sure to change the text here</h2>
-                        <p class="modal__text">And, remember to swap out the placeholder images. If you want, upload
-                            your own font and
-                            change them at the top of this file.</p>
+                        <h1 class="modal__title">11111111</h1>
+                        <h2 class="modal__sub-title">11111111</h2>
+                        <p class="modal__text">11111111</p>
                         <div class="modal__button-wrap">
                             <a class="modal__btn modal__btn--secondary" href="#"
                                 onclick="appboyBridge.logClick('1');">Secondary
