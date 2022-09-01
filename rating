@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: -ms-grid;
+            display: grid;
+            place-content: center;
+            background-color: #222222;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            background-color: rgba(0, 0, 0, 0.5);
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            position: absolute;
+        }
+
+        .rating {
+            border: none;
+            padding: 0;
+            float: left;
+        }
+
+        .rating>input {
+            display: none;
+        }
+
+        .rating>label {
+            float: right;
+            cursor: pointer;
+            margin-right: 16px;
+        }
+
+        .rating>label:first-of-type {
+            margin-right: 0;
+        }
+
+        .rating>label svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .rating>label svg polygon {
+            fill: #d8d8d8;
+        }
+
+
+        /***** CSS Magic to Highlight Stars on Hover *****/
+
+        .rating>input:checked~label svg polygon,
+        .rating:not(:checked)>label:hover svg polygon,
+        .rating:not(:checked)>label:hover~label svg polygon {
+            fill: #337209;
+        }
+
+
+        /* hover previous stars in list */
+
+        .rating>input:checked+label:hover svg polygon,
+        .rating>input:checked~label:hover svg polygon,
+        .rating>label:hover~input:checked~label svg polygon,
+        .rating>input:checked~label:hover~label svg polygon {
+            fill: #ffed85;
+        }
+
+        .bottomFixedModal {
+            border-radius: 8px 8px 0 0;
+            background-color: white;
+            width: 100%;
+        }
+
+        .bottomFixedModal button {
+            outline: none;
+        }
+
+        .bottomFixedModal .header {
+            padding: 18px;
+            position: relative;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            border-bottom: 1px solid #d8d8d8;
+        }
+
+        .bottomFixedModal .header span {
+            color: #191818;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 1.4px;
+            line-height: 20px;
+            display: inline-block;
+            padding: 2px 22px 0;
+            line-height: 1;
+        }
+
+        .bottomFixedModal .header a.close {
+            position: absolute;
+            left: 18px;
+            line-height: 0;
+        }
+
+        .bottomFixedModal .header a.close svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .bottomFixedModal .body {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .bottomFixedModal .body .row {
+            margin-bottom: 24px;
+        }
+
+        .bottomFixedModal .body .ratingAction {
+            display: none;
+        }
+
+        .bottomFixedModal .body .row:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .bottomFixedModal .body p {
+            color: #191818;
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+            line-height: 22px;
+            margin: 0;
+        }
+
+        .bottomFixedModal .body .btnWrap {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .bottomFixedModal .body .btnWrap a,
+        .bottomFixedModal .body .btnWrap button {
+            border: 0;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            line-height: 18px;
+            text-decoration: none;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+
+        .bottomFixedModal .body .btnWrap a.dismiss {
+            display: inline-block;
+            padding: 11px;
+            border: 1px solid #191919;
+            color: #191919;
+        }
+
+        .bottomFixedModal .body .btnWrap a.dismiss span {
+            padding-top: 2px;
+            display: inline-block;
+        }
+
+        .bottomFixedModal .body .btnWrap a.black {
+            background-color: #191818;
+            padding: 11px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .bottomFixedModal .body .btnWrap input[type="text"] {
+            margin-bottom: 24px;
+            padding: 8px 12px;
+            color: #191818;
+            border-radius: 4px;
+            border: 1px solid #9b9b9b;
+        }
+
+        .bottomFixedModal .body .btnWrap input[type="text"]::-webkit-input-placeholder {
+            color: #9b9b9b;
+        }
+
+        .bottomFixedModal .body .btnWrap input[type="text"]:-ms-input-placeholder {
+            color: #9b9b9b;
+        }
+
+        .bottomFixedModal .body .btnWrap input[type="text"]::-ms-input-placeholder {
+            color: #9b9b9b;
+        }
+
+        .bottomFixedModal .body .btnWrap input[type="text"]::placeholder {
+            color: #9b9b9b;
+        }
+
+        .bottomFixedModal .body .btnWrap button.white {
+            border: 1px solid #191919;
+            color: #191919;
+            padding: 11px;
+            margin-bottom: 8px;
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="bottomFixedModal">
+            <form>
+                <div class="header">
+                    <a href="appboy://close" class="btn close">
+                        <svg viewBox="0 0 123.05 123.05">
+                            <path
+                                d="M121.325,10.925l-8.5-8.399c-2.3-2.3-6.1-2.3-8.5,0l-42.4,42.399L18.726,1.726c-2.301-2.301-6.101-2.301-8.5,0l-8.5,8.5
+      c-2.301,2.3-2.301,6.1,0,8.5l43.1,43.1l-42.3,42.5c-2.3,2.3-2.3,6.1,0,8.5l8.5,8.5c2.3,2.3,6.1,2.3,8.5,0l42.399-42.4l42.4,42.4
+      c2.3,2.3,6.1,2.3,8.5,0l8.5-8.5c2.3-2.3,2.3-6.1,0-8.5l-42.5-42.4l42.4-42.399C123.625,17.125,123.625,13.325,121.325,10.925z" />
+                        </svg>
+                    </a>
+                    <span>
+                        자란다가 어떠세요?
+                    </span>
+                </div>
+                <div class="body">
+                    <div class="row">
+                        <p>자란다 서비스가 어떤지 평가해주세요!</p>
+                    </div>
+                    <div class="row">
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label class="full" for="star5">
+                                <svg>
+                                    <polygon points="24 38.4851485 9.14823529 46 12.0282353 30.0990099 0 18.8267327 16.6023529 16.4851485 24 2 31.3976471 16.4851485 48 18.8267327 35.9717647 30.0990099 38.8517647 46" />
+                                </svg>
+                            </label>
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label class="full" for="star4">
+                                <svg>
+                                    <polygon points="24 38.4851485 9.14823529 46 12.0282353 30.0990099 0 18.8267327 16.6023529 16.4851485 24 2 31.3976471 16.4851485 48 18.8267327 35.9717647 30.0990099 38.8517647 46" />
+                                </svg>
+                            </label>
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label class="full" for="star3">
+                                <svg>
+                                    <polygon points="24 38.4851485 9.14823529 46 12.0282353 30.0990099 0 18.8267327 16.6023529 16.4851485 24 2 31.3976471 16.4851485 48 18.8267327 35.9717647 30.0990099 38.8517647 46" />
+                                </svg>
+                            </label>
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label class="full" for="star2">
+                                <svg>
+                                    <polygon points="24 38.4851485 9.14823529 46 12.0282353 30.0990099 0 18.8267327 16.6023529 16.4851485 24 2 31.3976471 16.4851485 48 18.8267327 35.9717647 30.0990099 38.8517647 46" />
+                                </svg>
+                            </label>
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label class="full" for="star1">
+                                <svg>
+                                    <polygon points="24 38.4851485 9.14823529 46 12.0282353 30.0990099 0 18.8267327 16.6023529 16.4851485 24 2 31.3976471 16.4851485 48 18.8267327 35.9717647 30.0990099 38.8517647 46" />
+                                </svg>
+                            </label>
+                        </fieldset>
+                    </div>
+                    <div class="row ra">
+                        <p id="rt">
+                        </p>
+                    </div>
+                    <div class="row btnWrap ra">
+                        <a href="javascript:;" class="black top re cta">1</a>
+                        <button type=submit class="white middle re cta"></button>
+                        <input id=comment_txt type=text class="comment re" placeholder="Add a comment..." maxlength="100" />
+                        <a href="javascript:;" class="black bottom re cta">2</a>
+                        <a href="javascript:;" class="dismiss re cta">
+                            <span>다음에 평가할래요</span>
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>
+        var ratingText1 = "더 노력해야겠군요. 좋은 의견 진심으로 감사드립니다.";
+        var ratingText2 = "어떤 점을 더 개선할까요?";
+        var ratingText3 = "항상 노력하겠습니다.<br/>";
+
+        var buttonText1 = '피드백남기기';
+        var buttonText2 = "다음에 평가하기";
+        var buttonText3 = "제출하기";
+        var buttonText4 = "리뷰남기기";
+
+        // webhook url (send comment)
+        var webhookURL = "https://hooks.zapier.com/hooks/catch/506930/o09ab13";
+
+        function hideAllElements() {
+            var ratingElements = document.getElementsByClassName('re');
+            Array.from(ratingElements).forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+
+        function sendComment(comment) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", webhookURL, false);
+            xhr.send(JSON.stringify({
+                "event_name": "in_app_rated",
+                "event_property": "comment",
+                "note": comment
+            }));
+        }
+
+        function sendRating(rating) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", webhookURL, false);
+            xhr.send(JSON.stringify({
+                "event_name": "in_app_rated",
+                "event_property": "chosen_rate",
+                "note": rating
+            }));
+        }
+
+        function sendCloseButton() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", webhookURL, false);
+            xhr.send(JSON.stringify({
+                "event_name": "in_app_rated",
+                "event_property": "closed",
+                "note": true
+            }));
+        }
+
+        function sendCta(cta) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", webhookURL, false);
+            xhr.send(JSON.stringify({
+                "event_name": "in_app_rated",
+                "event_property": "clicked_cta",
+                "note": cta
+            }));
+        }
+
+        function getRating() {
+            var checkedStar = document.querySelector('.rating input:checked');
+            if (checkedStar != null) {
+                return parseFloat(checkedStar.value);
+            } else {
+                return null;
+            }
+        }
+
+        $(function() {
+            ratingAreaElements = document.getElementsByClassName('ra');
+            Array.from(ratingAreaElements).forEach(el => {
+                el.style.display = 'none';
+            });
+
+            hideAllElements();
+
+            // rating stars
+            var ratingStars = $('.rating');
+            ratingStars.on('click', function() {
+                ratingAreaElements = document.getElementsByClassName('ra');
+                Array.from(ratingAreaElements).forEach(el => {
+                    el.removeAttribute('style');
+                });
+
+                hideAllElements();
+
+                var checkedStar = document.querySelector('.rating input:checked');
+                if (checkedStar != null) {
+                    var rating = parseFloat(checkedStar.value);
+                    if (rating < 3) {
+                        document.getElementById('rt').innerHTML = ratingText1;
+                        document.querySelector('a.top').innerHTML = buttonText1;
+                        document.querySelector('button.middle').innerHTML = buttonText2;
+                        document.querySelector('a.top').removeAttribute('style');
+                        document.querySelector('button.middle').removeAttribute('style');
+                    } else if (rating >= 3 && rating < 5) {
+                        document.getElementById('rt').innerHTML = ratingText2;
+                        document.querySelector('a.bottom').innerHTML = buttonText3;
+                        document.querySelector('input.comment').removeAttribute('style');
+                        document.querySelector('a.bottom').removeAttribute('style');
+                    } else if (rating == 5) {
+                        document.getElementById('rt').innerHTML = ratingText3;
+                        document.querySelector('a.bottom').innerHTML = buttonText4;
+                        document.querySelector('a.bottom').removeAttribute('style');
+                        document.querySelector('a.dismiss').removeAttribute('style');
+                    }
+                }
+            });
+
+            // '별점1-2점 제출하기' button
+            $('a.top').on('click', function() {
+                window.location = "https://www.naver.com";
+            });
+
+            $('a.bottom').on('click', function() {
+                if (document.querySelector('a.bottom').innerHTML == buttonText3) {
+                    // 'SUBMIT' button
+                    var rated = getRating();
+                    if (rated && rated > 0) {
+                        sendRating(rated);
+                    }
+
+                    var message = document.getElementById('comment_txt').value;
+                    if (message && message.length > 0) {
+                        sendComment(message);
+                    }
+                } else if (document.querySelector('a.bottom').innerHTML == buttonText4) {
+                    // 'REVIEW ON APP STORE' button
+                    window.location = "https://try.jaranda.kr/e/VpPMrZ9P2rb";
+                }
+            });
+
+            window.addEventListener("ab.BridgeReady", function () {
+                // 'X' button
+                $('a.close').on('click', function() {
+                    sendCloseButton();
+                    appboyBridge.closeMessage();
+                });
+
+                // 'Call To Action' buttons
+                $('.cta').on('click', function(e) {
+                    sendCta(e.target.innerHTML);
+
+                    if (e.target.innerText == 'DISMISS') {
+                        appboyBridge.closeMessage();
+                    } else if (e.target.innerText == 'SUBMIT') {
+                        appboyBridge.closeMessage();
+                    }
+                });
+
+                $('button.middle').on('click', function() {
+                    // 'NO, THANK YOU' button
+                    if (document.querySelector('button.middle').innerHTML == buttonText2) {
+                        appboyBridge.closeMessage();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
