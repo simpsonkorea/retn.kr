@@ -1,0 +1,217 @@
+
+          <!doctype html>
+            <html lang='en'>
+              <head>
+                <!-- Required meta tags -->
+                <meta charset='utf-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover'>
+                <title>name</title>
+                <link rel='stylesheet' type='text/css' href='default.css'>
+                <!-- Hosted fonts -->
+                
+                <style> @font-face {
+          font-family: 'Helvetica';
+          font-style: normal;
+          src: local('Helvetica'), url('./Helvetica.none') format('opentype');
+        } </style>
+              </head>
+              <body class='ab-in-app-message ab-html-message modal'>
+                <!-- First screen start -->
+                <div id='inapp-15068'
+                      class='modal'
+                      style='
+                        height: 100vh;
+                        width: 100vw;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: rgba(0,0,0, 0.4);
+                        <!--in-app message 밖의 영역 컬러-->
+                        overflow: auto;'>
+                <div id='card_15068'
+  class="card_4162 transition flex flex-col "
+  data-target="shared--dark-mode.inapp"
+  style="
+    z-index: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+    margin: 0px 0px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+      height: auto;
+      width: 320px;
+      background: #ffffff;
+    padding-bottom: 30px;
+    padding-top: 0px;
+  ">
+
+    <a id="close_circle_15068" class="cross_15068 close_4162 close-btn flex column items-center justify-center" style="width: 28px;
+      height: 28px;
+      background:;
+      border-width: 0px;
+      border-style: solid;
+      border-color: ;
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 100;" href="appboy://close" onclick="appboyBridge.closeMessage()"></a>
+    
+    
+    <div  id="image_4086"
+      class="image_4086 items-center transition"
+      style="
+        z-index: 3;
+        width: 100%;
+        margin-top: 0px;
+        height: 180px;
+        background-size: cover;
+        background-position: center;
+        background-image: url('./header-15068.jpg');
+        ">
+</div>
+
+    
+    
+    
+    
+    
+    <div id="text_8338"
+  class="text_8338 text-content"
+  data-id="80969"
+  style="
+    z-index: 3;
+    background: ;
+    color: #000000;
+    text-align: center;
+    font-family: 'Helvetica';
+    font-size: 24px;
+    line-height: normal;
+    letter-spacing: normal;
+    width: 100%;
+    padding-right: 25px;
+    padding-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 0px;"
+  >
+  
+  title
+</div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    <div id="text_8339"
+  class="text_8339 text-content"
+  data-id="80970"
+  style="
+    z-index: 3;
+    background: ;
+    color: #000000;
+    text-align: center;
+    font-family: 'Helvetica';
+    font-size: 14px;
+    line-height: normal;
+    letter-spacing: normal;
+    width: 100%;
+    padding-right: 25px;
+    padding-left: 25px;
+    margin-top: 10px;
+    margin-bottom: 20px;"
+  >
+  
+  body
+</div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <div id="button_container_15068"
+    class="buttons_3738 flex transition w-100 flex-wrap flex-col"
+    style="
+      z-index: 3;
+      text-align: center;
+      font-family: 'Helvetica';
+      font-size: 16px;
+      letter-spacing: 0px;
+      padding-right: 25px;
+      padding-left: 25px;
+      background: transparent;
+      justify-content: center;
+      align-items: center;
+      ">
+        
+        <!-- Links only on download, not in the app-->
+          <a class="flex flex-col justify-center btn_15068 button" href="https://www.pinterest.co.kr/pin/539024649157354175/?mt=login&amp;nic_v3=1a6lYt307" style="
+          background: #ffffff;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          border: 1px solid ;
+          justify-self:  center;
+          color: #b22222;
+          width: 100%;
+          border-radius: 5px;
+          height: 45px;
+          padding-left: ;
+          padding-right: ;
+          
+          " >
+            cta 는 여기에
+          </a>
+</div>
+
+
+    
+    
+    
+    
+    
+    
+
+  <style>
+
+    #card_15068 {
+      --close_cross_width: 14px;
+      --close_cross_thickness: 2px;
+      --close_cross_background_color: #b22222;
+    }
+
+    .cross_15068:before, .cross_15068:after {
+      position: absolute;
+      content: '';
+      height: var(--close_cross_width);
+      width: var(--close_cross_thickness);
+      background: var(--close_cross_background_color);
+      z-index: 100;
+    }
+
+    .cross_15068:before {
+      transform: rotate(45deg);
+    }
+
+    .cross_15068:after {
+      transform: rotate(-45deg);
+    }
+
+
+  </style>
+</div>
+                </div>
+                <!-- Add inapp script -->
+              </body>
+              <script src='bootstrap.min.js'></script>
+              <script type='text/javascript' src='default.js'></script>
+          </html>
